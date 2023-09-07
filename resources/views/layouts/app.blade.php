@@ -16,6 +16,11 @@
 
         <!-- Styles -->
         @livewireStyles
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+        <!-- Styles -->
     </head>
     <body class="font-sans antialiased">
         <x-banner />
@@ -41,5 +46,12 @@
         @stack('modals')
 
         @livewireScripts
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+        <x-livewire-alert::scripts />
+
+        @stack('js')
+
     </body>
 </html>
