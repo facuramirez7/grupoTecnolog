@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Usuarios') }}
+            Usuario: {{ $user->name }}
         </h2>
     </x-slot>
-    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-        <livewire:user.user-component />
-    </div>
+    <livewire:user.user-show-component :user="$user"/>
 </x-app-layout>
+
+

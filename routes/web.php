@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
+
+/* Users */
 Route::get('/usuarios', function () {
-    return view('admin.users');
-})->name('users');
+    return view('admin.user.index');
+})->name('users.index');
+
+Route::get('/usuario/{user}', [UserController::class, 'show'])->name('users.show');
+Route::put('/usuario/{user}', [UserController::class, 'update'])->name('user.update');
