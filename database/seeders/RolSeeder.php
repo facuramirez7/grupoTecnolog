@@ -14,8 +14,14 @@ class RolSeeder extends Seeder
     public function run(): void
     {
         DB::table('rols')->insert([
-            'name' => 'Administrador',
+            'name' => 'Súper Administrador',
             'description' => 'Administrador del sistema',
+        ]);
+
+        DB::table('rols')->insert([
+            'id' => 100,
+            'name' => 'Recién llegado',
+            'description' => 'Usuario que se acaba de crear la cuenta',
         ]);
     }
 }

@@ -17,10 +17,16 @@
                     </x-nav-link>
                 </div>
 
-                <!-- Navigation Links -->
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('Usuarios') }}
+                    </x-nav-link>
+                </div>
+
+                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('rols.index') }}" :active="request()->routeIs('rols.index')">
+                        {{ __('Roles') }}
                     </x-nav-link>
                 </div>
             </div>

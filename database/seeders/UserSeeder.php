@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'Administrador',
             'email' => 'facuramirezcpbm@gmail.com',
             'password' => '$2y$10$CDJlX9AQPOoXfBm3gHX6q.f70fRIoXX3lqeqUN2Qm5JmdkjF4l9sq',
+            'rol_id' => 1,
         ]);
     }
 }

@@ -8,14 +8,14 @@ use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 
-class UserIndexComponent extends Component
+class IndexComponent extends Component
 {
     use LivewireAlert;
     use WithPagination;
 
     #[Rule('required', message: 'El campo Nombre es requerido')]
     #[Rule('string')]
-    #[Rule('min:5', message: 'El campo nombre debe tener al menos 5 letras')]
+    #[Rule('min:5', message: 'El campo Nombre debe tener al menos 5 letras')]
     public $name = '';
 
     #[Rule('required', message: 'El campo Email es requerido')]
@@ -37,7 +37,7 @@ class UserIndexComponent extends Component
         $users = User::where('name', 'like', '%' . $this->search . '%')
             ->orWhere('email', 'like', '%' . $this->search . '%')
             ->paginate(10);
-        return view('livewire.user.user-index-component')->with('users', $users);
+        return view('livewire.user.index-component')->with('users', $users);
     }
 
     public function updatedSearch()
