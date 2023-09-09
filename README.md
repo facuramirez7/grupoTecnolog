@@ -3,7 +3,6 @@
 ## TALL Stack
  [![Tailwind][Tailwind.js]][Tailwind-url]   [![Alpine][Alpine.js]][Alpine-url]   [![Laravel][Laravel.js]][Laravel-url]   [![Livewire][Livewire.js]][Livewire-url]
 
-## <h3>Step by Step:<h3/>
 
 
 
