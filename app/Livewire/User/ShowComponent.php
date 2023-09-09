@@ -33,13 +33,18 @@ class ShowComponent extends Component
         return view('livewire.user.show-component')->with('roles', $roles);
     }
 
-    public function edit(User $user){
+    public function mount()
+    {
+        $this->rol_id = $this->user->rol_id;
+    }
+
+    public function edit(User $user)
+    {
         $validated = $this->validate();
-        $this->updatedName = $validated['name'];  
+        $this->updatedName = $validated['name'];
         $user->update($validated);
-        $this->alert('success', 'Usuario editado con éxito!',[
+        $this->alert('success', 'Usuario editado con éxito!', [
             'position' =>  'top',
         ]);
-        
     }
 }
