@@ -13,14 +13,10 @@ class IndexComponent extends Component
     use LivewireAlert;
     use WithPagination;
 
-    #[Rule('required', message: 'El campo Nombre es requerido')]
-    #[Rule('string')]
-    #[Rule('min:5', message: 'El campo Nombre debe tener al menos 5 letras')]
+    #[Rule('min:5|string|required')]
     public $name = '';
 
-    #[Rule('required', message: 'El campo Descripción es requerido')]
-    #[Rule('string')]
-    #[Rule('min:5', message: 'El campo Descripción debe tener al menos 5 letras')]
+    #[Rule('min:5|string|required')]
     public $description = '';
 
     protected $listeners = [

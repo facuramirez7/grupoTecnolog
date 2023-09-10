@@ -13,20 +13,24 @@ class IndexComponent extends Component
     use LivewireAlert;
     use WithPagination;
 
-    #[Rule('required', message: 'El campo Nombre es requerido')]
-    #[Rule('string')]
-    #[Rule('min:5', message: 'El campo Nombre debe tener al menos 5 letras')]
+    #[Rule('min:5|string|required')]
     public $name = '';
 
-    #[Rule('required', message: 'El campo Email es requerido')]
-    #[Rule('email', message: 'El campo Email debe ser de tipo email. Ejemplo: example@example.com')]
-    #[Rule('unique:users', message: 'Ya se encuentra el email en uso')]
-    public $email = '';
+    #[Rule('required|unique:users|email')]
+    public $email;
 
     public $search = '';
     public $userId;
-    
 
+    /* Sorting */
+    public $sortBy = 'name';
+    public $asc = true;
+
+
+    protected $queryString = [
+        'sortBy' => ['except' => 'name'],
+        'asc' => ['except' => true],
+    ];
 
     protected $listeners = [
         'confirmed'
@@ -36,6 +40,7 @@ class IndexComponent extends Component
     {
         $users = User::where('name', 'like', '%' . $this->search . '%')
             ->orWhere('email', 'like', '%' . $this->search . '%')
+            ->orderBy($this->sortBy, $this->asc ? 'ASC' : 'DESC')
             ->paginate(10);
         return view('livewire.user.index-component')->with('users', $users);
     }
@@ -51,7 +56,7 @@ class IndexComponent extends Component
         $validated["password"] = bcrypt('gt-12345678');
         User::create($validated);
         $this->reset('name', 'email');
-        $this->alert('success', 'Usuario creado con éxito!',[
+        $this->alert('success', 'Usuario creado con éxito!', [
             'position' =>  'top',
         ]);
     }
@@ -72,7 +77,8 @@ class IndexComponent extends Component
         ]);
     }
 
-    public function confirmed($data){
+    public function confirmed($data)
+    {
         $user = User::find($data['value']);
         $user->delete();
         $this->alert('success', 'Usuario eliminado con éxito', [
@@ -84,5 +90,12 @@ class IndexComponent extends Component
             'showCancelButton' =>  false,
             'showConfirmButton' =>  false,
         ]);
+    }
+
+    public function sort($field)
+    {
+        if($field == $this->sortBy)
+            $this->asc = !$this->asc;
+        $this->sortBy = $field;
     }
 }

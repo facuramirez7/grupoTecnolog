@@ -8,16 +8,24 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Nombre
+                    <button wire:click="sort('id')">ID</button>
+                    <x-sort-icon sortField="id" :sort-by="$sortBy" :asc="$asc" />
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Email
+                    <button wire:click="sort('name')">Nombre</button>
+                    <x-sort-icon sortField="name" :sort-by="$sortBy" :asc="$asc" />
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Rol
+                    <button wire:click="sort('email')">Email</button>
+                    <x-sort-icon sortField="email" :sort-by="$sortBy" :asc="$asc" />
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Fecha de creación
+                    <button wire:click="sort('rol_id')">Rol</button>
+                    <x-sort-icon sortField="rol_id" :sort-by="$sortBy" :asc="$asc" />
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <button wire:click="sort('created_at')">Fecha de creación</button>
+                    <x-sort-icon sortField="created_at" :sort-by="$sortBy" :asc="$asc" />
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Acciones
@@ -28,6 +36,9 @@
             @foreach ($users as $user)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600">
 
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $user->id }}
+                    </th>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $user->name }}
                     </th>
@@ -46,8 +57,7 @@
                                 <i class="fa-solid fa-pencil"></i>
                             </x-primary-button></a>
 
-                        <x-danger-button wire:click="destroyUser( {{ $user->id }})"
-                            wire:loading.attr="disabled">
+                        <x-danger-button wire:click="destroyUser( {{ $user->id }})" wire:loading.attr="disabled">
                             <i class="fa-solid fa-trash"></i>
                         </x-danger-button>
                     </td>
@@ -66,7 +76,7 @@
                 <div class="relative z-0 w-full mb-6 group">
                     <input wire:model='name' type="text" id="name"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
+                         required />
                     <x-input-error for="name" class="mt-2" />
                     <label for="name"
                         class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombre</label>
@@ -74,7 +84,7 @@
                 <div class="relative z-0 w-full mb-6 group">
                     <input wire:model='email' type="email" id="email"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
+                         required />
                     <x-input-error for="email" class="mt-2" />
                     <label for="email"
                         class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>

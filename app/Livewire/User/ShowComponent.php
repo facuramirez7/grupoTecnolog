@@ -15,9 +15,7 @@ class ShowComponent extends Component
 
     public $user;
 
-    #[Rule('required', message: 'El campo Nombre es requerido')]
-    #[Rule('string')]
-    #[Rule('min:5', message: 'El campo nombre debe tener al menos 5 letras')]
+    #[Rule('min:5|string|required')]
     public $name = "";
 
     #[Rule('required', message: 'El campo Rol es requerido')]
