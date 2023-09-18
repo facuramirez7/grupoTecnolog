@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Livewire\User;
+namespace App\Livewire\Client;
 
-use App\Models\User;
+use App\City;
+use App\Country;
+use App\Models\Client;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -16,21 +18,23 @@ class IndexComponent extends Component
     #[Rule('min:5|string|required')]
     public $name = '';
 
-    #[Rule('required|unique:users|email')]
+    #[Rule('min:5|string|required')]
+    public $country = '';
+
+    #[Rule('min:5|string|required')]
+    public $province = '';
+
+    #[Rule('min:5|string|required')]
+    public $address = '';
+
+    #[Rule('required|email')]
     public $email;
 
     public $search = '';
-    public $userId;
 
     /* Sorting */
     public $sortBy = 'name';
     public $asc = true;
-
-
-    protected $queryString = [
-        'sortBy' => ['except' => 'name'],
-        'asc' => ['except' => true],
-    ];
 
     protected $listeners = [
         'confirmed'
@@ -38,11 +42,10 @@ class IndexComponent extends Component
 
     public function render()
     {
-        $users = User::where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('email', 'like', '%' . $this->search . '%')
+        $clients = Client::where('name', 'like', '%' . $this->search . '%')
             ->orderBy($this->sortBy, $this->asc ? 'ASC' : 'DESC')
             ->paginate(10);
-        return view('livewire.user.index-component')->with('users', $users);
+        return view('livewire.client.index-component')->with('clients', $clients);
     }
 
     public function updatedSearch()
@@ -50,20 +53,19 @@ class IndexComponent extends Component
         $this->resetPage();
     }
 
-    public function createUser()
+    public function createClient()
     {
         $validated = $this->validate();
-        $validated["password"] = bcrypt('gt-12345678');
-        User::create($validated);
-        $this->reset('name', 'email');
-        $this->alert('success', 'Usuario creado con éxito!', [
+        Client::create($validated);
+        $this->reset();
+        $this->alert('success', 'Cliente creado con éxito!', [
             'position' =>  'top',
         ]);
     }
 
-    public function destroyUser(User $user)
+    public function destroyClient(Client $client)
     {
-        $this->alert('question', "Estas seguro que quieres eliminar al usuario $user->name?", [
+        $this->alert('question', "Estas seguro que quieres eliminar el cliente $client->name?", [
             'timer' => null,
             'showConfirmButton' => true,
             'showCancelButton' => True,
@@ -72,16 +74,16 @@ class IndexComponent extends Component
             'confirmButtonColor' => 'red',
             'onConfirmed' => "confirmed",
             'data' => [
-                'value' => $user->id,
+                'value' => $client->id,
             ]
         ]);
     }
 
     public function confirmed($data)
     {
-        $user = User::find($data['value']);
-        $user->delete();
-        $this->alert('success', 'Usuario eliminado con éxito', [
+        $client = Client::find($data['value']);
+        $client->delete();
+        $this->alert('success', 'Cliente eliminado con éxito', [
             'position' =>  'top',
             'timer' =>  3000,
             'toast' =>  true,
