@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
+use App\Models\Rol;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,10 +36,14 @@ Route::middleware([
 Route::get('/usuarios', function () {
     return view('admin.user.index');
 })->name('users.index');
-Route::get('/usuario/{user}', [UserController::class, 'show'])->name('users.show');
+Route::get('/usuario/{user}', function(User $user) {
+    return view('admin.user.show')->with('user', $user);
+})->name('users.show');
 
 /* Rols ONLY SUPER ADMIN = ME*/
 Route::get('/roles', function () {
     return view('admin.rol.index');
 })->name('rols.index');
-Route::get('/rol/{rol}', [RolController::class, 'show'])->name('rols.show');
+Route::get('/rol/{rol}', function(Rol $rol) {
+    return view('admin.rol.show')->with('rol', $rol);
+})->name('rols.show');
