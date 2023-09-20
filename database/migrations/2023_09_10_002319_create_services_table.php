@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->text('description');
-            $table->integer('prize');
+            $table->float('prize', 15, 2);
             $table->timestamps();
         });
     }

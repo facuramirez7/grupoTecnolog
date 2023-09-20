@@ -4,6 +4,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
 use App\Models\Client;
 use App\Models\Rol;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -56,3 +57,12 @@ Route::get('/clientes', function () {
 Route::get('/cliente/{client}', function(Client $client) {
     return view('admin.client.show')->with('client', $client);
 })->name('clients.show');
+
+/* Services
+ */
+Route::get('/servicios', function () {
+    return view('admin.service.index');
+})->name('services.index');
+Route::get('/servicio/{service}', function(Service $service) {
+    return view('admin.client.show')->with('service', $service);
+})->name('service.show');
