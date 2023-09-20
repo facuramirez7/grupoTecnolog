@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->integer('user_id')->nullable();
-            $table->string('country', 50);
-            $table->string('province', 50);
+            $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('province_id');
             $table->string('address', 150);
             $table->string('email');
             $table->string('photo', 400)->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
+
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('province_id')->references('id')->on('provinces');
         });
     }
 

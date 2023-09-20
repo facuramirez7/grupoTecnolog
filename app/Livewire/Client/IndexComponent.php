@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Client;
 
-use App\City;
-use App\Country;
 use App\Models\Client;
+use App\Models\Country;
+use App\Models\Province;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -21,11 +21,11 @@ class IndexComponent extends Component
     #[Rule('min:5|string|required')]
     public $name = '';
 
-    #[Rule('min:5|string|required')]
-    public $country = '';
+    #[Rule('required|numeric')]
+    public $country_id = 1;
 
-    #[Rule('min:5|string|required')]
-    public $province = '';
+    #[Rule('required|numeric')]
+    public $province_id = 13;
 
     #[Rule('min:5|string|required')]
     public $address = '';
@@ -35,6 +35,12 @@ class IndexComponent extends Component
 
     #[Rule('nullable|sometimes|image|max:1024')]
     public $photo;
+
+    public $countries;
+    public $provinces;
+    public $selectedCountry = null;
+    public $selectedProvince = null;
+    
 
     public $search = '';
 
@@ -46,13 +52,29 @@ class IndexComponent extends Component
         'confirmed'
     ];
 
+    public function mount()
+    {
+        $this->countries = Country::all();
+        $this->provinces = collect();
+    }
+
     public function render()
     {
         $clients = Client::where('name', 'like', '%' . $this->search . '%')
             ->orderBy($this->sortBy, $this->asc ? 'ASC' : 'DESC')
             ->paginate(10);
-        return view('livewire.client.index-component')->with('clients', $clients);
+        $data = [
+            'clients' => $clients
+        ];
+        return view('livewire.client.index-component')->with($data);
     }
+
+    public function updatedSelectedCountry($country)
+    {
+        $this->provinces = Province::where('country_id', $country)->get();
+        $this->selectedProvince = null;
+    }
+
 
     public function updatedSearch()
     {
@@ -62,11 +84,13 @@ class IndexComponent extends Component
     public function createClient()
     {
         $validated = $this->validate();
-        if($this->photo){
-           $validated['photo'] =  $this->photo->store('clients', 'public');
+        $validated = array_merge($validated, ['country_id' => $this->selectedCountry, 'province_id' => $this->selectedProvince]);
+        if ($this->photo) {
+            $validated['photo'] =  $this->photo->store('clients', 'public');
         }
         Client::create($validated);
         $this->reset();
+        $this->countries = Country::all();
         $this->alert('success', 'Cliente creado con éxito!', [
             'position' =>  'top',
         ]);

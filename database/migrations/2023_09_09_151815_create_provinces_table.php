@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('provinces', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->text('description');
-            $table->integer('prize');
-            $table->timestamps();
+            $table->unsignedBigInteger('country_id');
+
+            $table->foreign('country_id')->references('id')->on('countries');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('provinces');
     }
 };

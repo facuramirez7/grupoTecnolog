@@ -9,20 +9,24 @@ class Client extends Model
 {
     use HasFactory;
 
-    
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'user_id',
-        'country',
-        'province',
+        'country_id',
+        'province_id',
         'address',
         'email',
         'photo',
         'active'
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 }

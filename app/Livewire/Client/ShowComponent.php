@@ -4,6 +4,8 @@ namespace App\Livewire\Client;
 
 use App\Models\Rol;
 use App\Models\Client;
+use App\Models\Country;
+use App\Models\Province;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -49,9 +51,11 @@ class ShowComponent extends Component
 
     public function render()
     {
+        $country = Country::find($this->client->country_id);
+        $province = Province::find($this->client->province_id);
         $this->updatedName ? $this->name = $this->updatedName : $this->name =  $this->client->name;
-        $this->updatedCountry ? $this->country = $this->updatedCountry : $this->country =  $this->client->country;
-        $this->updatedProvince ? $this->province = $this->updatedProvince : $this->province =  $this->client->province;
+        $this->country = $country->name;
+        $this->province = $province->name;
         $this->updatedAddress ? $this->address = $this->updatedAddress : $this->address =  $this->client->address;
         $this->updatedEmail ? $this->email = $this->updatedEmail : $this->email =  $this->client->email;
         $this->updatedActive != 'unprocessed' ? $this->active = $this->updatedActive : $this->active =  $this->client->active;
