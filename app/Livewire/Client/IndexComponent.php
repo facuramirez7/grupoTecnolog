@@ -5,15 +5,18 @@ namespace App\Livewire\Client;
 use App\City;
 use App\Country;
 use App\Models\Client;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
+use Livewire\WithFileUploads;
 
 class IndexComponent extends Component
 {
     use LivewireAlert;
     use WithPagination;
+    use WithFileUploads;
 
     #[Rule('min:5|string|required')]
     public $name = '';
@@ -29,6 +32,9 @@ class IndexComponent extends Component
 
     #[Rule('required|email')]
     public $email;
+
+    #[Rule('nullable|sometimes|image|max:1024')]
+    public $photo;
 
     public $search = '';
 
@@ -56,6 +62,9 @@ class IndexComponent extends Component
     public function createClient()
     {
         $validated = $this->validate();
+        if($this->photo){
+           $validated['photo'] =  $this->photo->store('clients', 'public');
+        }
         Client::create($validated);
         $this->reset();
         $this->alert('success', 'Cliente creado con éxito!', [
@@ -82,6 +91,12 @@ class IndexComponent extends Component
     public function confirmed($data)
     {
         $client = Client::find($data['value']);
+        if ($client->photo) {
+            $imagenPath = 'public/' . $client->photo;
+            if (Storage::exists($imagenPath)) {
+                Storage::delete($imagenPath);
+            }
+        }
         $client->delete();
         $this->alert('success', 'Cliente eliminado con éxito', [
             'position' =>  'top',

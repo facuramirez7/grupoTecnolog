@@ -1,7 +1,6 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <button x-data x-on:click="$dispatch('open-modal',{name:'create'})"
-        class="text-white m-4 px-3 py-1 bg-green-500 rounded text-l">Añadir rol <i
-            class="fa-solid fa-plus"></i></button>
+        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm m-4 px-3 py-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir rol <i class="fa-solid fa-plus"></i></button>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -34,12 +33,11 @@
                     </td>
                     <td class="px-6 py-4">
                         <a href="/rol/{{ $rol->id }}">
-                            <x-primary-button>
-                                <i class="fa-solid fa-pencil"></i>
-                            </x-primary-button></a>
+                            <x-info-button>
+                                <i class="fa-solid fa-info pl-1 pr-1"></i>
+                            </x-info-button></a>
 
-                        <x-danger-button wire:click="destroyRol( {{ $rol->id }})"
-                            wire:loading.attr="disabled">
+                        <x-danger-button wire:click="destroyRol( {{ $rol->id }})" wire:loading.attr="disabled">
                             <i class="fa-solid fa-trash"></i>
                         </x-danger-button>
                     </td>
@@ -49,7 +47,7 @@
     </table>
 
     <div class="mt-4 mb-4 pr-4 pl-4">
-       
+
     </div>
 
     <x-modal-model title="Crear rol" name="create">
@@ -82,4 +80,3 @@
     </x-modal-model>
 
 </div>
-

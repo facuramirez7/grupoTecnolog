@@ -1,6 +1,6 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <button x-data x-on:click="$dispatch('open-modal',{name:'create'})"
-        class="text-white m-4 px-3 py-1 bg-green-500 rounded text-l">Añadir usuario <i
+        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm m-4 px-3 py-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir usuario <i
             class="fa-solid fa-plus"></i></button>
     <input wire:model.live="search" placeholder="Buscar.."
         class="block m-4 p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -53,9 +53,9 @@
                     </td>
                     <td class="px-6 py-4">
                         <a href="/usuario/{{ $user->id }}">
-                            <x-primary-button>
-                                <i class="fa-solid fa-pencil"></i>
-                            </x-primary-button></a>
+                            <x-info-button>
+                                <i class="fa-solid fa-info pl-1 pr-1"></i>
+                            </x-info-button></a>
 
                         <x-danger-button wire:click="destroyUser( {{ $user->id }})" wire:loading.attr="disabled">
                             <i class="fa-solid fa-trash"></i>

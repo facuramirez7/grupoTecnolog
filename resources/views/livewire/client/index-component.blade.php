@@ -1,7 +1,7 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <button x-data x-on:click="$dispatch('open-modal',{name:'create'})"
-        class="text-white m-4 px-3 py-1 bg-green-500 rounded text-l">Añadir cliente <i
-            class="fa-solid fa-plus"></i></button>
+        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm m-4 px-3 py-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir
+        cliente <i class="fa-solid fa-plus"></i></button>
     <input wire:model.live="search" placeholder="Buscar.."
         class="block m-4 p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -15,7 +15,7 @@
                     <x-sort-icon sortField="name" :sort-by="$sortBy" :asc="$asc" />
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Email
+                    <button disabled>Email</button>
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <button wire:click="sort('country')">País</button>
@@ -39,7 +39,13 @@
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600">
 
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $client->id }}
+                        @if (!is_null($client->photo))
+                            <img src="{{ url("/storage/$client->photo") }}" class="rounded w-10 h-10 block">
+                        @else
+                            <img src="{{ asset('img/some/default.jpg') }}" class="rounded w-10 h-10  block">
+                        @endif
+
+
                     </th>
                     <td class="px-6 py-4">
                         {{ $client->name }}
@@ -62,9 +68,9 @@
                     </td>
                     <td class="px-6 py-4">
                         <a href="/cliente/{{ $client->id }}">
-                            <x-primary-button>
-                                <i class="fa-solid fa-pencil"></i>
-                            </x-primary-button></a>
+                            <x-info-button>
+                                <i class="fa-solid fa-info pl-1 pr-1"></i>
+                            </x-info-button></a>
 
                         <x-danger-button wire:click="destroyClient( {{ $client->id }})" wire:loading.attr="disabled">
                             <i class="fa-solid fa-trash"></i>
@@ -84,44 +90,52 @@
             <form class="p-4">
                 <div class="relative z-0 w-full mb-6 group">
                     <input wire:model='name' type="text" id="name"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                     <x-input-error for="name" class="mt-2" />
                     <label for="name"
                         class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombre</label>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input wire:model='country' type="text" id="country"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                     <x-input-error for="country" class="mt-2" />
                     <label for="country"
                         class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">País</label>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input wire:model='province' type="text" id="province"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                     <x-input-error for="province" class="mt-2" />
                     <label for="province"
                         class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Provincia</label>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input wire:model='address' type="text" id="address"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                     <x-input-error for="address" class="mt-2" />
                     <label for="address"
                         class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Dirección</label>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input wire:model='email' type="text" id="email"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                     <x-input-error for="email" class="mt-2" />
                     <label for="email"
                         class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
                 </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input wire:model='photo' type="file" id="photo" accept="image/png, image/jpeg"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
+                    <x-input-error for="photo" class="mt-2" />
+                    <label for="photo"
+                        class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Imagen (preferentemente cuadrada de 10x10)</label>
+                </div>
+
+                @if ($photo)
+                    <div class="flex items-center justify-center">
+                        <img src="{{ $photo->temporaryUrl() }}" class="rounded w-20 h-20 mt-2 block">
+                    </div>
+                @endif
 
                 @slot('button')
                     <x-green-button type="submit" wire:click.prevent="createClient" wire:loading.attr="disabled">
