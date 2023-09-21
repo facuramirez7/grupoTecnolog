@@ -40,8 +40,8 @@
         <!-- Page Heading -->
         @if (isset($header))
             <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-                   <a href="/dashboard"><img src="{{asset('/img/logosGt/gt-color-32.png')}}" sizes="32x32" alt="GT"></a> {{ $header }}
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
                 </div>
             </header>
         @endif

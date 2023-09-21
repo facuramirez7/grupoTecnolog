@@ -42,7 +42,7 @@ Route::get('/usuario/{user}', function(User $user) {
     return view('admin.user.show')->with('user', $user);
 })->name('users.show');
 
-/* Rols ONLY SUPER ADMIN = ME*/
+/* Roles ONLY SUPER ADMIN = ME*/
 Route::get('/roles', function () {
     return view('admin.rol.index');
 })->name('rols.index');
