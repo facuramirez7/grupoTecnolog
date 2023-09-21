@@ -42,31 +42,41 @@
                             <i class="fa-solid fa-house-chimney"></i><span class="mx-4">Inicio</span>
                         </a>
 
+                        {{-- Devices --}}
+                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring @if(request()->routeIs('dashboard')) bg-gray-300 @endif"
+                            href="{{ route('services.index') }}">
+                            <i class="fa-solid fa-tachograph-digital"></i></i><span class="mx-4">Máquinas</span>
+                        </a>
+
                         {{-- Users --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring {{ request()->is('users.index') ? 'bg-gray-300' : '' }}"
+                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if(request()->routeIs('users.index')) bg-gray-300 @endif"
                             href="{{ route('users.index') }}">
                             <i class="fa-solid fa-users"></i></i><span class="mx-4">Usuarios</span>
                         </a>
 
                         {{-- Roles --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring {{ request()->is('rols.index') ? 'bg-gray-300' : '' }}"
+                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if(request()->routeIs('rols.index')) bg-gray-300 @endif"
                             href="{{ route('rols.index') }}">
-                            <i class="fa-solid fa-house-chimney"></i><span class="mx-4">Roles</span>
+                            <i class="fa-solid fa-person-circle-exclamation"></i></i><span class="mx-4">Roles</span>
                         </a>
 
                         {{-- Clients --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring {{ request()->is('clients.index') ? 'bg-gray-300' : '' }}"
+                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if(request()->routeIs('clients.index')) bg-gray-300 @endif"
                             href="{{ route('clients.index') }}">
                             <i class="fa-solid fa-wine-bottle"></i></i><span class="mx-4">Clientes</span>
                         </a>
 
                         {{-- Services --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring {{ request()->is('services.index') ? 'bg-gray-300' : '' }}"
+                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if(request()->routeIs('services.index')) bg-gray-300 @endif"
                             href="{{ route('services.index') }}">
                             <i class="fa-solid fa-list-check"></i></i><span class="mx-4">Servicios</span>
                         </a>
 
-
+                        {{-- Components --}}
+                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if(request()->routeIs('services.index')) bg-gray-300 @endif"
+                            href="{{ route('services.index') }}">
+                            <i class="fa-solid fa-ring"></i><span class="mx-4">Repuestos</span>
+                        </a>
 
                     </div>
 
