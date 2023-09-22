@@ -64,5 +64,5 @@ Route::get('/servicios', function () {
     return view('admin.service.index');
 })->name('services.index');
 Route::get('/servicio/{service}', function(Service $service) {
-    return view('admin.client.show')->with('service', $service);
+    return view('admin.service.show')->with('service', $service);
 })->name('service.show');

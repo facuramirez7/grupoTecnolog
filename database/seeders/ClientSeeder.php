@@ -18,7 +18,9 @@ class ClientSeeder extends Seeder
             'country_id' => 1,
             'province_id' => 13,
             'address' => 'Km. 29, RP15',
-            'email' => 'info@chandon.com.ar'
+            'email' => 'info@chandon.com.ar',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
