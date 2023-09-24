@@ -23,5 +23,16 @@ class ClientSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('clients')->insert([
+            'name' => 'Nieto Senetiner',
+            'country_id' => 1,
+            'province_id' => 13,
+            'address' => 'Guardia Vieja 2000',
+            'email' => 'turismo@nietosenetiner.com.ar',
+            'photo' => 'clientsSeeder/ns.png',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

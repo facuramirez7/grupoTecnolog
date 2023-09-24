@@ -18,7 +18,7 @@ class IndexComponent extends Component
     use WithPagination;
     use WithFileUploads;
 
-    #[Rule('min:5|string|required')]
+    #[Rule('min:5|string|required|max:40')]
     public $name = '';
 
     #[Rule('required|numeric')]
@@ -27,7 +27,7 @@ class IndexComponent extends Component
     #[Rule('required|numeric')]
     public $province_id = 13;
 
-    #[Rule('min:5|string|required')]
+    #[Rule('min:5|string|required|max:150')]
     public $address = '';
 
     #[Rule('required|email')]

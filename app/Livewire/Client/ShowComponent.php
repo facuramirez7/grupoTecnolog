@@ -20,7 +20,7 @@ class ShowComponent extends Component
 
     public $client;
 
-    #[Rule('min:5|string|required')]
+    #[Rule('min:5|string|required|max:40')]
     public $name = '';
 
     #[Rule('min:5|string|required')]
@@ -29,7 +29,7 @@ class ShowComponent extends Component
     #[Rule('min:5|string|required')]
     public $province = '';
 
-    #[Rule('min:5|string|required')]
+    #[Rule('min:5|string|required|max:150')]
     public $address = '';
 
     #[Rule('required|email')]

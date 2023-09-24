@@ -37,10 +37,10 @@ Route::middleware([
 
 
 /* Devices */
-Route::get('/maquinas', function () {
+Route::get('/equipos', function () {
     return view('admin.device.index');
 })->name('devices.index');
-Route::get('/maquina/{device}', function(Device $device) {
+Route::get('/equipo/{device}', function(Device $device) {
     return view('admin.device.show')->with('device', $device);
 })->name('device.show');
 

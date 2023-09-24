@@ -24,6 +24,35 @@ class DeviceSeeder extends Seeder
             'last_visit' => '2022-10-16',
             'visit_type' => 2,
             'prox_service' => 3,
+            'photo' => 'deviceSeeder/maquina.jpg'
+        ]);
+
+        DB::table('devices')->insert([
+            'client_id' => 1,
+            'deviceType_id' => 2,
+            'model' => ' GSC 45-36-177',
+            'serial_number' => '1725-253',
+            'hours_lastServ' => 448,
+            'actual_hours' => 650,
+            'update_actualHours' => '2020-09-30',
+            'last_visit' => '2022-10-16',
+            'visit_type' => 2,
+            'prox_service' => 3,
+            'photo' => 'deviceSeeder/maquina2.jpg'
+        ]);
+
+        DB::table('devices')->insert([
+            'client_id' => 2,
+            'deviceType_id' => 1,
+            'model' => 'CA 501-01-02',
+            'serial_number' => '8004-247',
+            'hours_lastServ' => 489,
+            'actual_hours' => 1542,
+            'update_actualHours' => '2020-09-30',
+            'last_visit' => '2022-10-16',
+            'visit_type' => 2,
+            'prox_service' => 3,
+            'photo' => 'deviceSeeder/decanter.jpg'
         ]);
     }
 }

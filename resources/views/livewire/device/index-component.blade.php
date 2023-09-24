@@ -1,94 +1,95 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <button x-data x-on:click="$dispatch('open-modal',{name:'create'})"
         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm m-4 px-3 py-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir
-        máquina <i class="fa-solid fa-plus"></i></button>
-    <input wire:model.live="search" placeholder="Buscar.."
-        class="block m-4 p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    <select wire:model.live="searchClient" placeholder="Cliente"
-        class="block m-4 p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <option value="" selected>-</option>
-        @foreach ($clients as $client)
-            <option value="{{ $client->id }}" wire:key="client-{{ $client->id }}">
-                {{ $client->name }}</option>
-        @endforeach
-    </select>
-    <p>{{ $searchClient }}</p>
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <button disabled>Cliente</button>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <button wire:click="sort('deviceType_id')">Equipo</button>
-                    <x-sort-icon sortField="deviceType_id" :sort-by="$sortBy" :asc="$asc" />
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <button wire:click="sort('model')">Modelo</button>
-                    <x-sort-icon sortField="model" :sort-by="$sortBy" :asc="$asc" />
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <button wire:click="sort('serial_number')">Número de serie</button>
-                    <x-sort-icon sortField="serial_number" :sort-by="$sortBy" :asc="$asc" />
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Acciones
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+        equipo <i class="fa-solid fa-plus"></i></button>
+    <div>
+        <input wire:model.live="search" placeholder="Buscar.."
+            class="inline-block ml-4 p-4  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select wire:model.live="searchType"
+            class="inline-block ml-4 p-4 pr-8 mt-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="" selected>Todos los tipos de equipo</option>
+            @foreach ($types as $type)
+                <option value="{{ $type->id }}" wire:key="type-{{ $type->id }}">
+                    {{ $type->name }}</option>
+            @endforeach
+        </select>
+        <select wire:model.live="searchClient"
+            class="inline-block ml-4 p-4 pr-8 mt-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="" selected>Todos los clientes</option>
+            @foreach ($clients as $client)
+                <option value="{{ $client->id }}" wire:key="client-{{ $client->id }}">
+                    {{ $client->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="container my-6 mx-auto px-4 md:px-12">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
             @foreach ($devices as $device)
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600">
+                <!-- Column -->
+                <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
 
-                    <td scope="row" class="px-6 py-4">
-                        @if (!is_null($device->photo))
-                            <img src="{{ url("/storage/$device->photo") }}" class="rounded w-10 h-10 block">
-                        @else
-                            <img src="{{ asset('img/some/default.jpg') }}" class="rounded w-10 h-10 block">
-                        @endif
-                    </td>
-                    <td class="px-6 py-4">
+                    <!-- Article -->
+                    <article class="overflow-hidden rounded-lg shadow-lg">
+
+                        <a href="#">
+                            @if (!is_null($device->photo))
+                                <img src="{{ url("/storage/$device->photo") }}" class="block h-64 w-full">
+                            @else
+                                <img src="{{ asset('img/some/default.jpg') }}" class="block h-64 w-full">
+                            @endif
+                        </a>
+
+                        <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                            <h1 class="text-lg">
+                                <a class="no-underline text-black" href="#">
+                                    <b style="color: #009DD7">{{ $device->model }}</b> |
+                                    <b>{{ $device->serial_number }}</b>
+                                </a>
+                            </h1>
+                            <p class="text-grey-darker text-xs">
+                                {{ $device->type->name }}
+                            </p>
+                        </header>
                         @php
                             $client = $clients->find($device->client_id);
                         @endphp
-                        @if (!is_null($client->photo))
-                            <img src="{{ url("/storage/$client->photo") }}" class="rounded w-10 h-10 block">
-                        @else
-                            <img src="{{ asset('img/some/default.jpg') }}" class="rounded w-10 h-10 block">
-                        @endif
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $device->type->name }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $device->model }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $device->serial_number }}
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="/maquina/{{ $device->id }}">
-                            <x-info-button>
-                                <i class="fa-solid fa-info pl-1 pr-1"></i>
-                            </x-info-button></a>
+                        <div class="flex items-center justify-between leading-none p-2 md:p-4">
+                            <a class="flex items-center no-underline text-black" href="#">
+                                @if (!is_null($client->photo))
+                                    <img src="{{ url("/storage/$client->photo") }}" class="block rounded-full h-6 w-6">
+                                @else
+                                    <img src="{{ asset('img/some/default.jpg') }}" class="block rounded-full">
+                                @endif
+                                <p class="ml-2 text-sm client">
+                                    <a target="_blank" class="hover:underline"
+                                        href="/cliente/{{ $client->id }}">{{ $client->name }}</a>
+                                </p>
+                            </a>
 
-                        <x-danger-button wire:click="destroyDevice( {{ $device->id }})" wire:loading.attr="disabled">
-                            <i class="fa-solid fa-trash"></i>
-                        </x-danger-button>
-                    </td>
-                </tr>
+                            <span
+                                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Activa</span>
+
+                        </div>
+
+                    </article>
+                    <!-- END Article -->
+                </div>
+                <!-- END Column -->
             @endforeach
-        </tbody>
-    </table>
+        </div>
+    </div>
+
 
     <div class="mt-4 mb-4 pr-4 pl-4">
         {{ $devices->links() }}
     </div>
-
-    <x-modal-model title="Crear máquina" name="create">
+    <style>
+        .client {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+    <x-modal-model title="Crear equipo" name="create">
         @slot('body')
             <form class="p-4">
                 <div class="relative z-0 w-full mb-6 group">
@@ -166,7 +167,7 @@
 
                 @slot('button')
                     <x-green-button type="submit" wire:click.prevent="createDevice" wire:loading.attr="disabled">
-                        Crear máquina <i class="fa-solid fa-plus"></i>
+                        Crear equipo <i class="fa-solid fa-plus"></i>
                     </x-green-button>
                 @endslot
             </form>

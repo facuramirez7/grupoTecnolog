@@ -20,10 +20,11 @@ class IndexComponent extends Component
     use WithPagination;
     use WithFileUploads;
 
-    #[Rule('min:5|string|required')]
+
+    #[Rule('min:5|string|required|max:100')]
     public $model = '';
 
-    #[Rule('min:5|string|required')]
+    #[Rule('min:5|string|required|max:50')]
     public $serial_number = '';
 
     #[Rule('required|numeric')]
@@ -43,6 +44,7 @@ class IndexComponent extends Component
 
     public $search = '';
     public $searchClient;
+    public $searchType;
 
     /* Sorting */
     public $sortBy = 'model';
@@ -58,13 +60,23 @@ class IndexComponent extends Component
     ];
 
 
-    public function render($lol = null)
+    public function render()
     {
-        $devices = Device::when($this->searchClient, function ($query) {
-            return $query->where('client_id', '=', $this->searchClient);
-        })
-            ->where('model', 'like', '%' . $this->search . '%')
-            ->orWhere('serial_number', 'like', '%' . $this->search . '%')
+        $devicesQuery = Device::query();
+
+        if (!empty($this->searchClient)) {
+            $devicesQuery->where('client_id', $this->searchClient);
+        }
+
+        if (!empty($this->searchType)) {
+            $devicesQuery->where('deviceType_id', $this->searchType);
+        }
+
+        $devices = $devicesQuery
+            ->where(function ($query) {
+                $query->where('model', 'like', '%' . $this->search . '%')
+                    ->orWhere('serial_number', 'like', '%' . $this->search . '%');
+            })
             ->orderBy($this->sortBy, $this->asc ? 'ASC' : 'DESC')
             ->paginate(10);
         $clients = Client::all();
@@ -85,7 +97,11 @@ class IndexComponent extends Component
 
     public function updatedSearchClient()
     {
-        //dd('hola');
+        $this->resetPage();
+    }
+
+    public function updatedSearchType()
+    {
         $this->resetPage();
     }
 
@@ -97,14 +113,14 @@ class IndexComponent extends Component
         }
         Device::create($validated);
         $this->reset();
-        $this->alert('success', 'Máquina creado con éxito!', [
+        $this->alert('success', 'Equipo creado con éxito!', [
             'position' =>  'top',
         ]);
     }
 
     public function destroyDevice(Device $device)
     {
-        $this->alert('question', "Estas seguro que quieres eliminar la máquina $device->model - $device->serial_number?", [
+        $this->alert('question', "Estas seguro que quieres eliminar la equipo $device->model - $device->serial_number?", [
             'timer' => null,
             'showConfirmButton' => true,
             'showCancelButton' => True,
@@ -128,7 +144,7 @@ class IndexComponent extends Component
             }
         }
         $device->delete();
-        $this->alert('success', 'Máquina eliminado con éxito', [
+        $this->alert('success', 'Equipo eliminado con éxito', [
             'position' =>  'top',
             'timer' =>  3000,
             'toast' =>  true,
