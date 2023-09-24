@@ -78,7 +78,7 @@ class IndexComponent extends Component
                     ->orWhere('serial_number', 'like', '%' . $this->search . '%');
             })
             ->orderBy($this->sortBy, $this->asc ? 'ASC' : 'DESC')
-            ->paginate(10);
+            ->paginate(9);
         $clients = Client::all();
         $types = DeviceType::all();
         $data = [
@@ -120,7 +120,7 @@ class IndexComponent extends Component
 
     public function destroyDevice(Device $device)
     {
-        $this->alert('question', "Estas seguro que quieres eliminar la equipo $device->model - $device->serial_number?", [
+        $this->alert('question', "Estas seguro que quieres eliminar el equipo: $device->model - $device->serial_number?", [
             'timer' => null,
             'showConfirmButton' => true,
             'showCancelButton' => True,

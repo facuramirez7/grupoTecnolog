@@ -4,6 +4,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
 use App\Models\Client;
 use App\Models\Device;
+use App\Models\Part;
 use App\Models\Rol;
 use App\Models\Service;
 use App\Models\User;
@@ -20,16 +21,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 });
@@ -76,3 +73,12 @@ Route::get('/servicios', function () {
 Route::get('/servicio/{service}', function(Service $service) {
     return view('admin.service.show')->with('service', $service);
 })->name('service.show');
+
+
+/* Parts */
+Route::get('/repuestos', function () {
+    return view('admin.part.index');
+})->name('parts.index');
+Route::get('/repuesto/{part}', function(Part $part) {
+    return view('admin.part.show')->with('part', $part);
+})->name('part.show');

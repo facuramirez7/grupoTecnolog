@@ -72,9 +72,9 @@
                             <i class="fa-solid fa-screwdriver-wrench"></i><span class="mx-4">Servicios</span>
                         </a>
 
-                        {{-- Components --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('services.index')) bg-gray-300 @endif"
-                            href="{{ route('services.index') }}">
+                        {{-- Parts --}}
+                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('parts.index')) bg-gray-300 @endif"
+                            href="{{ route('parts.index') }}">
                             <i class="fa-solid fa-ring"></i><span class="mx-4">Repuestos</span>
                         </a>
 

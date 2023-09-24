@@ -31,7 +31,7 @@
                     <!-- Article -->
                     <article class="overflow-hidden rounded-lg shadow-lg">
 
-                        <a href="#">
+                        <a href="/equipo/{{ $device->id }}">
                             @if (!is_null($device->photo))
                                 <img src="{{ url("/storage/$device->photo") }}" class="block h-64 w-full">
                             @else
@@ -41,7 +41,7 @@
 
                         <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                             <h1 class="text-lg">
-                                <a class="no-underline text-black" href="#">
+                                <a class="no-underline text-black" href="/equipo/{{ $device->id }}">
                                     <b style="color: #009DD7">{{ $device->model }}</b> |
                                     <b>{{ $device->serial_number }}</b>
                                 </a>

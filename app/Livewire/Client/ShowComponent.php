@@ -90,7 +90,7 @@ class ShowComponent extends Component
         
         $this->updatedActive = $validated['active'];
         $client->update($validated);
-        $this->alert('success', 'Usuario editado con éxito!', [
+        $this->alert('success', 'Cliente editado con éxito!', [
             'position' =>  'top',
         ]);
     }
