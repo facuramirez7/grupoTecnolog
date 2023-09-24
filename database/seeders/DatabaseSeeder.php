@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProvinceSeeder::class);
         $this->call(ClientSeeder::class);
         $this->call(ServiceSeeder::class);
+        $this->call(DeviceTypeSeeder::class);
+        $this->call(DeviceSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -18,5 +18,17 @@ class ServiceSeeder extends Seeder
             'description' => 'Inicio de la actividad',
             'prize' => 100,
         ]);
+
+        DB::table('services')->insert([
+            'name' => '5000',
+            'description' => 'Servicio de 5000 horas',
+            'prize' => 100,
+        ]);
+
+        DB::table('services')->insert([
+            'name' => 'TyT',
+            'description' => 'Tambor y Tranmisión',
+            'prize' => 100,
+        ]);
     }
 }

@@ -1,2 +1,3 @@
-*
+clients/*
+devices/*
 !.gitignore

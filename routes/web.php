@@ -3,6 +3,7 @@
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
 use App\Models\Client;
+use App\Models\Device;
 use App\Models\Rol;
 use App\Models\Service;
 use App\Models\User;
@@ -34,6 +35,16 @@ Route::middleware([
 });
 
 
+
+/* Devices */
+Route::get('/maquinas', function () {
+    return view('admin.device.index');
+})->name('devices.index');
+Route::get('/maquina/{device}', function(Device $device) {
+    return view('admin.device.show')->with('device', $device);
+})->name('device.show');
+
+
 /* Users */
 Route::get('/usuarios', function () {
     return view('admin.user.index');
@@ -58,8 +69,7 @@ Route::get('/cliente/{client}', function(Client $client) {
     return view('admin.client.show')->with('client', $client);
 })->name('clients.show');
 
-/* Services
- */
+/* Services */
 Route::get('/servicios', function () {
     return view('admin.service.index');
 })->name('services.index');

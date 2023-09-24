@@ -43,8 +43,8 @@
                         </a>
 
                         {{-- Devices --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring @if (request()->routeIs('dashboard')) bg-gray-300 @endif"
-                            href="{{ route('services.index') }}">
+                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring @if (request()->routeIs('devices.index')) bg-gray-300 @endif"
+                            href="{{ route('devices.index') }}">
                             <i class="fa-solid fa-tachograph-digital"></i></i><span class="mx-4">Máquinas</span>
                         </a>
 
