@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Client;
 
-use App\Models\Rol;
 use App\Models\Client;
 use App\Models\Country;
 use App\Models\Province;

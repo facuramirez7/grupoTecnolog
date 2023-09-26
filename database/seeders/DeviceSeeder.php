@@ -22,7 +22,7 @@ class DeviceSeeder extends Seeder
             'actual_hours' => 19077,
             'update_actualHours' => '2020-09-30',
             'last_visit' => '2022-10-16',
-            'visit_type' => 2,
+            'service_id' => 2,
             'prox_service' => 3,
             'photo' => 'deviceSeeder/maquina.jpg'
         ]);
@@ -36,7 +36,7 @@ class DeviceSeeder extends Seeder
             'actual_hours' => 650,
             'update_actualHours' => '2020-09-30',
             'last_visit' => '2022-10-16',
-            'visit_type' => 2,
+            'service_id' => 2,
             'prox_service' => 3,
             'photo' => 'deviceSeeder/maquina2.jpg'
         ]);
@@ -50,8 +50,9 @@ class DeviceSeeder extends Seeder
             'actual_hours' => 1542,
             'update_actualHours' => '2020-09-30',
             'last_visit' => '2022-10-16',
-            'visit_type' => 2,
+            'service_id' => 2,
             'prox_service' => 3,
+            'active' => 0,
             'photo' => 'deviceSeeder/decanter.jpg'
         ]);
     }

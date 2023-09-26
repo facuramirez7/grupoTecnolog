@@ -21,8 +21,9 @@ return new class extends Migration
             $table->integer('actual_hours')->default(0);
             $table->date('update_actualHours')->nullable();
             $table->date('last_visit')->nullable();
-            $table->integer('visit_type')->nullable();
-            $table->integer('prox_service')->nullable();
+            $table->integer('service_id')->default(1);
+            $table->integer('prox_service')->default(1);
+            $table->boolean('active')->default(1);
             $table->string('photo', 400)->nullable();
             $table->timestamps();
 

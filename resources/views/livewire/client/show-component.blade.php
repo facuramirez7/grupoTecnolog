@@ -53,6 +53,7 @@
                 wire:change="loadFoto" accept="image/png, image/jpeg">
         </div>
     </div>
+
     <form class="p-4">
         <div class="relative z-0 w-full mb-6 group">
             <input type="text" wire:model='name'
@@ -94,8 +95,6 @@
                 class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
         </div>
         <div class="relative z-0 w-full mb-6 group">
-
-
             <label class="relative inline-flex items-center mr-5 cursor-pointer"><label for="active"
                     class=" inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Activo</label>
                 <input type="checkbox" wire:model='active' value="1" class="input-field sr-only peer"
@@ -103,7 +102,6 @@
                 <div
                     class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                 </div>
-
             </label>
         </div>
         <div class="relative z-0 w-full mb-6 group">
@@ -129,22 +127,4 @@
             Editar cliente <i class="fa-solid fa-pencil"></i>
         </x-primary-button>
     </form>
-    <script>
-        // Select all input fields and the button
-
-        var fileInput = document.querySelector('#fileInput');
-        var inputs = document.querySelectorAll('.input-field');
-        var button = document.querySelector('#myButton');
-
-        inputs.forEach(function(input) {
-            input.addEventListener('input', function() {
-                button.disabled = false;
-            });
-        });
-        fileInput.addEventListener('change', function() {
-            // Habilita el botón si se seleccionó un archivo, de lo contrario, deshabilita el botón
-            button.disabled = !fileInput.files.length;
-        });
-    </script>
-
 </div>

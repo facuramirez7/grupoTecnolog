@@ -4,9 +4,8 @@ namespace App\Livewire\Device;
 
 use App\Models\Client;
 use App\Models\Device;
-use App\Models\Country;
 use App\Models\DeviceType;
-use App\Models\Province;
+use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -45,6 +44,9 @@ class IndexComponent extends Component
     public $search = '';
     public $searchClient;
     public $searchType;
+    public $searchService;
+    public $active;
+    public $textActive = 'Todos';
 
     /* Sorting */
     public $sortBy = 'model';
@@ -57,13 +59,25 @@ class IndexComponent extends Component
     protected $queryString = [
         'search' => ['except' => ''],
         'searchClient' => ['except' => ''],
+        'searchType' => ['except' => ''],
+        'searchService' => ['except' => ''],
     ];
 
 
     public function render()
     {
         $devicesQuery = Device::query();
+        if (!empty($this->searchService)) {
+            $devicesQuery->where('prox_service',  $this->searchService);
+        }
 
+        if (!empty($this->active)) {
+            $devicesQuery->where('active',  1);
+            $this->textActive = 'Activos';
+        } else {
+            $this->textActive = 'Todos';
+        }
+        
         if (!empty($this->searchClient)) {
             $devicesQuery->where('client_id', $this->searchClient);
         }
@@ -81,10 +95,12 @@ class IndexComponent extends Component
             ->paginate(9);
         $clients = Client::all();
         $types = DeviceType::all();
+        $services = Service::all();
         $data = [
             'devices' => $devices,
             'clients' => $clients,
-            'types' => $types
+            'types' => $types,
+            'services' => $services,
         ];
         return view('livewire.device.index-component')->with($data);
     }
@@ -101,6 +117,11 @@ class IndexComponent extends Component
     }
 
     public function updatedSearchType()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedSearchService()
     {
         $this->resetPage();
     }

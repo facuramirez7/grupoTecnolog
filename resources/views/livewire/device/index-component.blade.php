@@ -21,6 +21,24 @@
                     {{ $client->name }}</option>
             @endforeach
         </select>
+
+        <select wire:model.live="searchService"
+            class="inline-block ml-4 p-4 pr-8 mt-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="" selected>Próximo servicio</option>
+            @foreach ($services as $service)
+                <option value="{{ $service->id }}" wire:key="service-{{ $service->id }}">
+                    {{ $service->name }}</option>
+            @endforeach
+        </select>
+        <div class="ml-4 mt-4">
+            <label class="relative inline-flex items-center mr-5 cursor-pointer">
+                <input type="checkbox" wire:model.live='active' class="sr-only peer" checked>
+                <div
+                    class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                </div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $textActive }}</span>
+            </label>
+        </div>
     </div>
     <div class="container my-6 mx-auto px-4 md:px-12">
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
@@ -29,45 +47,53 @@
                 <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
 
                     <!-- Article -->
-                    <article class="overflow-hidden rounded-lg shadow-lg">
+                    <article class="overflow-hidden rounded-lg shadow-lg p-2">
 
                         <a href="/equipo/{{ $device->id }}">
                             @if (!is_null($device->photo))
-                                <img src="{{ url("/storage/$device->photo") }}" class="block h-64 w-full">
+                                <img src="{{ url("/storage/$device->photo") }}" class="block rounded h-64 w-full">
                             @else
-                                <img src="{{ asset('img/some/default.jpg') }}" class="block h-64 w-full">
+                                <img src="{{ asset('img/some/default.jpg') }}" class="block rounded h-64 w-full">
                             @endif
                         </a>
 
                         <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                             <h1 class="text-lg">
-                                <a class="no-underline text-black" href="/equipo/{{ $device->id }}">
+                                <a class="no-underline text-black over" href="/equipo/{{ $device->id }}">
                                     <b style="color: #009DD7">{{ $device->model }}</b> |
                                     <b>{{ $device->serial_number }}</b>
                                 </a>
                             </h1>
-                            <p class="text-grey-darker text-xs">
-                                {{ $device->type->name }}
-                            </p>
                         </header>
                         @php
                             $client = $clients->find($device->client_id);
                         @endphp
-                        <div class="flex items-center justify-between leading-none p-2 md:p-4">
-                            <a class="flex items-center no-underline text-black" href="#">
-                                @if (!is_null($client->photo))
-                                    <img src="{{ url("/storage/$client->photo") }}" class="block rounded-full h-6 w-6">
-                                @else
-                                    <img src="{{ asset('img/some/default.jpg') }}" class="block rounded-full">
-                                @endif
-                                <p class="ml-2 text-sm client">
-                                    <a target="_blank" class="hover:underline"
-                                        href="/cliente/{{ $client->id }}">{{ $client->name }}</a>
-                                </p>
-                            </a>
+                        <div class="flex items-center justify-between leading-none">
+                            <div class="inline-block leading-none p-2 md:p-4">
+                                <a class="flex items-center hover:underline text-black text-sm"
+                                    href="cliente/{{ $client->id }}">
+                                    @if (!is_null($client->photo))
+                                        <img src="{{ url("/storage/$client->photo") }}"
+                                            class="block rounded-full h-6 w-6 mr-2">
+                                    @else
+                                        <img src="{{ asset('img/some/default.jpg') }}" class="block rounded-full mr-2">
+                                    @endif
 
+                                    <b class="over text-gray-500">{{ $client->name }}</b>
+                                </a>
+                            </div>
+                            <p class="text-grey-darker text-xs">
+                                {{ $device->type->name }}
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between leading-none text-xs md:p-4">
                             <span
-                                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Activa</span>
+                                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">{{ $device->next_service->name }}</span>
+                            @if ($device->active == 1)
+                                <i class="fa-solid fa-circle text-green-600"></i>
+                            @else
+                                <i class="fa-solid fa-circle text-red-600"></i>
+                            @endif
 
                         </div>
 
@@ -84,7 +110,7 @@
         {{ $devices->links() }}
     </div>
     <style>
-        .client {
+        .over {
             overflow: hidden;
             white-space: nowrap;
         }

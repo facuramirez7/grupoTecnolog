@@ -20,11 +20,22 @@ class Device extends Model
         'last_visit',
         'visit_type',
         'prox_service',
-        'photo'
+        'photo',
+        'active'
     ];
 
     public function type()
     {
         return $this->belongsTo(DeviceType::class, 'deviceType_id');
+    }
+
+    public function last_service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function next_service()
+    {
+        return $this->belongsTo(Service::class, 'prox_service');
     }
 }
