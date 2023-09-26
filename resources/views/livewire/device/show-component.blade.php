@@ -142,6 +142,21 @@
         </div>
 
         <div class="relative z-0 w-full mb-6 group">
+            <label for="client_id"
+                class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Próximo
+                servicio</label>
+            <select wire:model='client_id'
+                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="myInput2">
+                <option value="0">Sin cliente</option>  
+                @foreach ($clients as $client)
+                    <option value="{{ $client->id }}" wire:key="client-{{ $client->id }}">{{ $client->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="relative z-0 w-full mb-6 group">
             <label class="relative inline-flex items-center mr-5 cursor-pointer"><label for="active"
                     class=" inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Activo</label>
                 <input type="checkbox" wire:model='active' value="1" class="input-field sr-only peer"

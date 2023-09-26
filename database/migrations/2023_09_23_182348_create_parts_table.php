@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
+            $table->string('photo', 400)->nullable();
             $table->string('serial_number', 50)->unique();
             $table->string('description', 100);
-            $table->integer('buy_prize');
-            $table->integer('sell_prize');
+            $table->integer('buy_prize')->default(0);
+            $table->integer('sell_prize')->default(0);
+            $table->unsignedInteger('stock')->default(0);
         });
     }
 

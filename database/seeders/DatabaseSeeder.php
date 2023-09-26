@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceSeeder::class);
         $this->call(DeviceTypeSeeder::class);
         $this->call(DeviceSeeder::class);
+        $this->call(PartSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

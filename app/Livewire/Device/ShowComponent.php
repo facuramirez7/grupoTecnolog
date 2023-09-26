@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Device;
 
+use App\Models\Client;
 use App\Models\Device;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
@@ -36,6 +37,9 @@ class ShowComponent extends Component
     #[Rule('required|numeric')]
     public $prox_service;
 
+    #[Rule('required|numeric')]
+    public $client_id;
+
     #[Rule('bool')]
     public $active;
 
@@ -52,12 +56,14 @@ class ShowComponent extends Component
     public $updatedUpdate_actualHours = null;
     public $updatedPhoto = null;
     public $updatedPhotoView = null;
+    public $updatedClient = null;
     public $updatedActive = 'unprocessed';
 
     public function mount()
     {
         $this->service_id = $this->device->service_id;
         $this->prox_service = $this->device->prox_service;
+        $this->client_id = $this->device->client_id;
     }
 
     public function render()
@@ -71,8 +77,13 @@ class ShowComponent extends Component
         //$this->updatedActive != 'unprocessed' ? $this->active = $this->updatedActive : $this->active =  $this->device->active;
         $this->updatedPhoto ? $this->photo = $this->updatedPhoto : $this->photo =  $this->device->photo;
         $this->active = $this->device->active;
+        $clients = Client::all();
         $services = Service::all();
-        return view('livewire.device.show-component')->with('services', $services);
+        $data = [
+            'clients' => $clients,
+            'services' => $services,
+        ];
+        return view('livewire.device.show-component')->with($data);
     }
 
 
@@ -90,6 +101,7 @@ class ShowComponent extends Component
         $this->updatedActual_hours = $validated['actual_hours'];
         $this->updatedModel = $validated['model'];
         $this->updatedLastVisit = $validated['last_visit'];
+        $this->updatedUpdate_actualHours = $validated['update_actualHours'];
         $this->updatedUpdate_actualHours = $validated['update_actualHours'];
         if(isset($this->updatedPhoto)){
             $validated['photo'] =  $this->updatedPhoto->store('devices', 'public');

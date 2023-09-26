@@ -38,4 +38,9 @@ class Device extends Model
     {
         return $this->belongsTo(Service::class, 'prox_service');
     }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
 }

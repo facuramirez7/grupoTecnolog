@@ -70,29 +70,63 @@
                         @endphp
                         <div class="flex items-center justify-between leading-none">
                             <div class="inline-block leading-none p-2 md:p-4">
-                                <a class="flex items-center hover:underline text-black text-sm"
-                                    href="cliente/{{ $client->id }}">
-                                    @if (!is_null($client->photo))
-                                        <img src="{{ url("/storage/$client->photo") }}"
-                                            class="block rounded-full h-6 w-6 mr-2">
-                                    @else
-                                        <img src="{{ asset('img/some/default.jpg') }}" class="block rounded-full mr-2">
-                                    @endif
+                                @if (isset($client) || $device->client_id != 0)
+                                    <a class="flex items-center hover:underline text-black text-sm"
+                                        href="cliente/{{ $client->id }}">
+                                        @if (!is_null($client->photo))
+                                            <img src="{{ url("/storage/$client->photo") }}"
+                                                class="block rounded-full h-6 w-6 mr-2">
+                                        @else
+                                            <img src="{{ asset('img/some/default.jpg') }}"
+                                                class="block rounded-full h-6 w-6 mr-2">
+                                        @endif
 
-                                    <b class="over text-gray-500">{{ $client->name }}</b>
-                                </a>
+                                        <b class="over text-gray-500">{{ $client->name }}</b>
+                                    </a>
+                                @else
+                                    <b class="flex items-center hover:underline text-black text-sm">
+                                        <img src="{{ asset('img/some/default.jpg') }}"
+                                            class="block rounded-full h-6 w-6 mr-2">
+                                        <b class="over text-gray-500">Sin cliente</b>
+                                    </b>
+                                @endif
                             </div>
                             <p class="text-grey-darker text-xs">
                                 {{ $device->type->name }}
                             </p>
                         </div>
                         <div class="flex items-center justify-between leading-none text-xs md:p-4">
-                            <span
-                                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">{{ $device->next_service->name }}</span>
+                            @switch($device->next_service->id)
+                                @case(1)
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-green-500 text-white">
+                                @break
+
+                                @case(2)
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-yellow-500 text-white">
+                                @break
+
+                                @case(3)
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-blue-500 text-white">
+                                @break
+
+                                @case(4)
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-purple-500 text-white">
+                                @break
+
+                                @default
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-gray-500 text-white">
+                            @endswitch
+                            {{ $device->next_service->name }}</span>
+
                             @if ($device->active == 1)
-                                <i class="fa-solid fa-circle text-green-600"></i>
+                                <i class="fa-solid fa-circle text-green-600 text-sm"></i>
                             @else
-                                <i class="fa-solid fa-circle text-red-600"></i>
+                                <i class="fa-solid fa-circle text-red-600 text-sm"></i>
                             @endif
 
                         </div>
