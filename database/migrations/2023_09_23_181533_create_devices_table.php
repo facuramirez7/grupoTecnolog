@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('deviceType_id');
             $table->string('model', 100);
             $table->string('serial_number', 50);
-            $table->integer('hours_lastServ')->default(0);
-            $table->integer('actual_hours')->default(0);
+            $table->unsignedInteger('hours_lastServ')->default(0);
+            $table->unsignedInteger('actual_hours')->default(0);
             $table->date('update_actualHours')->nullable();
             $table->date('last_visit')->nullable();
             $table->integer('service_id')->default(1);

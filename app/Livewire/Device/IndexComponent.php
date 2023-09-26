@@ -32,10 +32,10 @@ class IndexComponent extends Component
     #[Rule('required|numeric')]
     public $deviceType_id = null;
 
-    #[Rule('required|numeric')]
+    #[Rule('required|numeric|min:0')]
     public $hours_lastServ = null;
 
-    #[Rule('required|numeric')]
+    #[Rule('required|numeric|min:0')]
     public $actual_hours = null;
 
     #[Rule('nullable|sometimes|image|max:1024')]

@@ -24,10 +24,10 @@ class ShowComponent extends Component
     #[Rule('min:5|string|required')]
     public $serial_number = '';
 
-    #[Rule('min:5|numeric|required')]
+    #[Rule('min:0|numeric|required')]
     public $hours_lastServ = '';
 
-    #[Rule('min:5|numeric|required')]
+    #[Rule('min:0|numeric|required')]
     public $actual_hours = '';
 
     #[Rule('required|numeric')]

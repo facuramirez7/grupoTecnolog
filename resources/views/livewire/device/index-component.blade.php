@@ -40,7 +40,7 @@
             </label>
         </div>
     </div>
-    <div class="container my-6 mx-auto px-4 md:px-12">
+    <div class="container mb-6 mx-auto px-4 md:px-12">
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
             @foreach ($devices as $device)
                 <!-- Column -->

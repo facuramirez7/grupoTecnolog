@@ -13,13 +13,13 @@ class ShowComponent extends Component
 
     public $service;
 
-    #[Rule('min:5|string|required')]
+    #[Rule('min:5|string|required|max:50')]
     public $name = "";
 
-    #[Rule('min:5|string|required')]
+    #[Rule('min:5|string|required|max:255')]
     public $description = "";
 
-    #[Rule('min:5|string|required')]
+    #[Rule('min:5|numeric|required')]
     public $prize = "";
 
     public $updatedName = null;
@@ -37,7 +37,6 @@ class ShowComponent extends Component
     public function edit(Service $service)
     {
         $validated = $this->validate();
-        $service->update($validated);
         $this->updatedName = $validated['name'];
         $this->updatedDesc = $validated['description'];
         $this->updatedPrize = $validated['prize'];
@@ -45,5 +44,6 @@ class ShowComponent extends Component
         $this->alert('success', 'Servicio editado con éxito!', [
             'position' =>  'top',
         ]);
+        $service->update($validated);
     }
 }

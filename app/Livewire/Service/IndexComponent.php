@@ -13,13 +13,13 @@ class IndexComponent extends Component
     use LivewireAlert;
     use WithPagination;
 
-    #[Rule('required|min:5|string')]
+    #[Rule('required|min:5|string|max:50')]
     public $name = '';
 
-    #[Rule('required|min:5|string')]
+    #[Rule('required|min:5|string|max:255')]
     public $description = '';
 
-    #[Rule('required|numeric')]
+    #[Rule('required|numeric|min:0')]
     public $prize = '';
 
     protected $listeners = [
