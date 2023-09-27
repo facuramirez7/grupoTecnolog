@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('photo', 400)->nullable();
             $table->string('serial_number', 50)->unique();
-            $table->string('description', 100);
-            $table->integer('buy_prize')->default(0);
-            $table->integer('sell_prize')->default(0);
+            $table->string('description', 100)->nullable();
+            $table->unsignedInteger('buy_prize')->default(0);
+            $table->unsignedInteger('sell_prize')->default(0);
             $table->unsignedInteger('stock')->default(0);
+            $table->timestamps();
         });
     }
 

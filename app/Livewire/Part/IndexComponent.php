@@ -4,6 +4,7 @@ namespace App\Livewire\Part;
 
 use App\Models\Part;
 use App\Models\Country;
+use App\Models\PartType;
 use App\Models\Province;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -18,29 +19,23 @@ class IndexComponent extends Component
     use WithPagination;
     use WithFileUploads;
 
-    #[Rule('min:5|string|required|max:40')]
-    public $name = '';
+    #[Rule('min:5|string|required|max:50')]
+    public $serial_number = '';
 
-    #[Rule('required|numeric')]
-    public $country_id = 1;
+    #[Rule('min:5|string|nullable|max:100')]
+    public $description = '';
 
-    #[Rule('required|numeric')]
-    public $province_id = 13;
+    #[Rule('required|numeric|min:0')]
+    public $buy_prize = '';
 
-    #[Rule('min:5|string|required|max:150')]
-    public $address = '';
+    #[Rule('required|numeric|min:0')]
+    public $sell_prize = '';
 
-    #[Rule('required|email')]
-    public $email;
+    #[Rule('required|numeric|min:0|nullable')]
+    public $stock = '';
 
     #[Rule('nullable|sometimes|image|max:1024')]
     public $photo;
-
-    public $countries;
-    public $provinces;
-    public $selectedCountry = null;
-    public $selectedProvince = null;
-    
 
     public $search = '';
 
@@ -57,8 +52,10 @@ class IndexComponent extends Component
         $parts = Part::where('serial_number', 'like', '%' . $this->search . '%')
             ->orderBy($this->sortBy, $this->asc ? 'ASC' : 'DESC')
             ->paginate(15);
+        $types = PartType::all();
         $data = [
-            'parts' => $parts
+            'parts' => $parts,
+            'types' => $types,
         ];
         return view('livewire.part.index-component')->with($data);
     }
@@ -72,13 +69,11 @@ class IndexComponent extends Component
     public function createPart()
     {
         $validated = $this->validate();
-        $validated = array_merge($validated, ['country_id' => $this->selectedCountry, 'province_id' => $this->selectedProvince]);
         if ($this->photo) {
             $validated['photo'] =  $this->photo->store('parts', 'public');
         }
         Part::create($validated);
         $this->reset();
-        $this->countries = Country::all();
         $this->alert('success', 'Repuesto creado con éxito!', [
             'position' =>  'top',
         ]);

@@ -18,7 +18,10 @@ class PartSeeder extends Seeder
             'serial_number' => '0007-3595-750',
             'buy_prize' => 14827,
             'sell_prize' => 19077,
-            'photo' => 'partSeeder/junta.jpg'
+            'photo' => 'partSeeder/junta.jpg',
+            'stock' => 10,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
