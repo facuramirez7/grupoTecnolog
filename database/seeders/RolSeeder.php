@@ -16,12 +16,16 @@ class RolSeeder extends Seeder
         DB::table('rols')->insert([
             'name' => 'Súper Administrador',
             'description' => 'Administrador del sistema',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('rols')->insert([
             'id' => 100,
             'name' => 'Recién llegado',
             'description' => 'Usuario que se acaba de crear la cuenta',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

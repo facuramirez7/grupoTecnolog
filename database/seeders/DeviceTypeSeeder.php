@@ -14,19 +14,27 @@ class DeviceTypeSeeder extends Seeder
     public function run(): void
     {
         DB::table('device_types')->insert([
-            'name' => 'Decanter'
+            'name' => 'Decanter',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('device_types')->insert([
-            'name' => 'Separadora'
+            'name' => 'Separadora',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('device_types')->insert([
-            'name' => 'OSD 25'
+            'name' => 'OSD 25',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('device_types')->insert([
-            'name' => 'OSD 20'
+            'name' => 'OSD 20',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

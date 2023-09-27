@@ -24,7 +24,9 @@ class DeviceSeeder extends Seeder
             'last_visit' => '2022-10-16',
             'service_id' => 2,
             'prox_service' => 3,
-            'photo' => 'deviceSeeder/maquina.jpg'
+            'photo' => 'deviceSeeder/maquina.jpg',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('devices')->insert([
@@ -38,7 +40,9 @@ class DeviceSeeder extends Seeder
             'last_visit' => '2022-10-16',
             'service_id' => 2,
             'prox_service' => 3,
-            'photo' => 'deviceSeeder/maquina2.jpg'
+            'photo' => 'deviceSeeder/maquina2.jpg',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('devices')->insert([
@@ -53,7 +57,9 @@ class DeviceSeeder extends Seeder
             'service_id' => 2,
             'prox_service' => 3,
             'active' => 0,
-            'photo' => 'deviceSeeder/decanter.jpg'
+            'photo' => 'deviceSeeder/decanter.jpg',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

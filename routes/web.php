@@ -4,7 +4,9 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
 use App\Models\Client;
 use App\Models\Device;
+use App\Models\DeviceType;
 use App\Models\Part;
+use App\Models\PartType;
 use App\Models\Rol;
 use App\Models\Service;
 use App\Models\User;
@@ -57,6 +59,22 @@ Route::get('/roles', function () {
 Route::get('/rol/{rol}', function(Rol $rol) {
     return view('admin.rol.show')->with('rol', $rol);
 })->name('rols.show');
+
+/* Device Types ONLY SUPER ADMIN = ME*/
+Route::get('/tipos-de-equipos', function () {
+    return view('admin.devType.index');
+})->name('device-type.index');
+Route::get('/tipo-de-equipo/{type}', function(DeviceType $type) {
+    return view('admin.devType.show')->with('type', $type);
+})->name('device-types.show');
+
+/* Part Type ONLY SUPER ADMIN = ME*/
+Route::get('/tipos-de-repuestos', function () {
+    return view('admin.partType.index');
+})->name('part-type.index');
+Route::get('/tipo-de-repuesto/{type}', function(PartType $type) {
+    return view('admin.partType.show')->with('type', $type);
+})->name('part-types.show');
 
 /* Clients */
 Route::get('/clientes', function () {
