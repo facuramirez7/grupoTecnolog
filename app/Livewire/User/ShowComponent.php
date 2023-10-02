@@ -27,7 +27,7 @@ class ShowComponent extends Component
     public function render()
     {
         $this->updatedName ? $this->name = $this->updatedName : $this->name =  $this->user->name;
-        $roles = Rol::where('id', '!=', 1)->get();
+        $roles = Rol::all();
         return view('livewire.user.show-component')->with('roles', $roles);
     }
 

@@ -15,8 +15,8 @@
                     <x-sort-icon sortField="serial_number" :sort-by="$sortBy" :asc="$asc" />
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    <button wire:click="sort('description')">Descripción</button>
-                    <x-sort-icon sortField="description" :sort-by="$sortBy" :asc="$asc" />
+                    <button wire:click="sort('part_type_id')">Descripción</button>
+                    <x-sort-icon sortField="part_type_id" :sort-by="$sortBy" :asc="$asc" />
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <button wire:click="sort('buy_prize')">Precio de compra</button>
@@ -50,7 +50,7 @@
                         {{ $part->serial_number }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $part->description }}
+                        {{ $part->partType->name }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $part->buy_prize}}€ 
@@ -91,11 +91,17 @@
                         class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Número de serie</label>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
-                    <input wire:model='description' type="text" id="description"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
-                    <x-input-error for="description" class="mt-2" />
-                    <label for="description"
-                        class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Descripción</label>
+                    <label for="part_type_id"
+                        class="inputs peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Tipo de repuesto</label>
+                    <select wire:model.live='part_type_id'
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="myInput2">
+                        <option value="" selected>Elige un tipo de repuesto</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}" wire:key="type-{{ $type->id }}">
+                                {{ $type->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input wire:model='buy_prize' type="number" id="buy_prize"

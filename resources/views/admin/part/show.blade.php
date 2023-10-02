@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Cliente: {{ $client->name }}
+            Repuesto: {{ $part->serial_number }}
         </h2>
     </x-slot>
-    <livewire:client.show-component :client="$client"/>
+    <livewire:part.show-component :part="$part"/>
 </x-app-layout>
 
 

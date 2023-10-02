@@ -22,8 +22,8 @@ class IndexComponent extends Component
     #[Rule('min:5|string|required|max:50')]
     public $serial_number = '';
 
-    #[Rule('min:5|string|nullable|max:100')]
-    public $description = '';
+    #[Rule('min:5|numeric')]
+    public $part_type_id = '';
 
     #[Rule('required|numeric|min:0')]
     public $buy_prize = '';
@@ -52,7 +52,7 @@ class IndexComponent extends Component
         $parts = Part::where('serial_number', 'like', '%' . $this->search . '%')
             ->orderBy($this->sortBy, $this->asc ? 'ASC' : 'DESC')
             ->paginate(15);
-        $types = PartType::all();
+        $types = PartType::orderBy('name', 'ASC')->get();
         $data = [
             'parts' => $parts,
             'types' => $types,
@@ -69,6 +69,7 @@ class IndexComponent extends Component
     public function createPart()
     {
         $validated = $this->validate();
+        //dd($validated);
         if ($this->photo) {
             $validated['photo'] =  $this->photo->store('parts', 'public');
         }

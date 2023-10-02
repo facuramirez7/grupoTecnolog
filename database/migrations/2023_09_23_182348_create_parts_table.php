@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('photo', 400)->nullable();
             $table->string('serial_number', 50)->unique();
-            $table->string('description', 100)->nullable();
+            $table->unsignedBigInteger('part_type_id');
             $table->unsignedInteger('buy_prize')->default(0);
             $table->unsignedInteger('sell_prize')->default(0);
             $table->unsignedInteger('stock')->default(0);
             $table->timestamps();
+
+            $table->foreign('part_type_id')->references('id')->on('part_types');
         });
     }
 

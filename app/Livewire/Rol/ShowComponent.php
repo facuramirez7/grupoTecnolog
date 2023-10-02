@@ -26,9 +26,7 @@ class ShowComponent extends Component
     {
         $this->updatedName ? $this->name = $this->updatedName : $this->name =  $this->rol->name;
         $this->updatedDesc ? $this->description = $this->updatedDesc : $this->description =  $this->rol->description;
-        //$this->name = $this->user->name;    
-        $rol = Rol::find(15);
-        return view('livewire.rol.show-component')->with('rol', $rol);
+        return view('livewire.rol.show-component');
     }
 
     public function edit(Rol $rol)

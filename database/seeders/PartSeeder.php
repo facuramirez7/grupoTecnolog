@@ -14,8 +14,8 @@ class PartSeeder extends Seeder
     public function run(): void
     {
         DB::table('parts')->insert([
-            'description' => 'Junta anular',
             'serial_number' => '0007-3595-750',
+            'part_type_id' => 29,
             'buy_prize' => 14827,
             'sell_prize' => 19077,
             'photo' => 'partSeeder/junta.jpg',

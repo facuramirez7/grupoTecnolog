@@ -12,9 +12,14 @@ class Part extends Model
     protected $fillable = [
         'photo',
         'serial_number',
-        'description',
+        'part_type_id',
         'buy_prize',
         'sell_prize',
         'stock',
     ];
+
+    public function partType()
+    {
+        return $this->belongsTo(PartType::class);
+    }
 }
