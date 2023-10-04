@@ -18,6 +18,7 @@ class ServicePerformed extends Model
         'description',
         'observations',
         'photo',
-        'active'
+        'viewed',
+        'approved',
     ];
 }

@@ -1,3 +1,6 @@
+@php
+    use App\Models\ServicePerformed;
+@endphp
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <button x-data x-on:click="$dispatch('open-modal',{name:'create'})"
         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm m-4 px-3 py-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir
@@ -47,7 +50,7 @@
                 <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
 
                     <!-- Article -->
-                    <article class="overflow-hidden rounded-lg shadow-lg p-2">
+                    <article class="overflow-hidden rounded-lg shadow-lg p-2 custom-article">
 
                         <a href="/equipo/{{ $device->id }}">
                             @if (!is_null($device->photo))
@@ -56,6 +59,12 @@
                                 <img src="{{ asset('img/some/default.jpg') }}" class="block rounded h-64 w-full">
                             @endif
                         </a>
+                        @php
+                            $notifications = ServicePerformed::where('device_id', $device->id)->where('viewed', 0)->get('device_id');
+                        @endphp
+                        @if (count($notifications) > 0)
+                             <a href=""><div class="number-badge"><i class="fa-solid fa-wrench"></i></div>   </a> 
+                        @endif
 
                         <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                             <h1 class="text-lg">
@@ -100,34 +109,34 @@
                                 @case(1)
                                     <span
                                         class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-green-500 text-white">
-                                @break
+                                    @break
 
-                                @case(2)
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-yellow-500 text-white">
-                                @break
+                                    @case(2)
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-yellow-500 text-white">
+                                        @break
 
-                                @case(3)
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-blue-500 text-white">
-                                @break
+                                        @case(3)
+                                            <span
+                                                class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-blue-500 text-white">
+                                            @break
 
-                                @case(4)
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-purple-500 text-white">
-                                @break
+                                            @case(4)
+                                                <span
+                                                    class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-purple-500 text-white">
+                                                @break
 
-                                @default
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-gray-500 text-white">
-                            @endswitch
-                            {{ $device->next_service->name }}</span>
+                                                @default
+                                                    <span
+                                                        class="inline-flex items-center gap-1.5 px-3 rounded-full text-xs font-medium bg-gray-500 text-white">
+                                                @endswitch
+                                                {{ $device->next_service->name }}</span>
 
-                            @if ($device->active == 1)
-                                <i class="fa-solid fa-circle text-green-600 text-sm"></i>
-                            @else
-                                <i class="fa-solid fa-circle text-red-600 text-sm"></i>
-                            @endif
+                                            @if ($device->active == 1)
+                                                <i class="fa-solid fa-circle text-green-600 text-sm"></i>
+                                            @else
+                                                <i class="fa-solid fa-circle text-red-600 text-sm"></i>
+                                            @endif
 
                         </div>
 
@@ -147,6 +156,32 @@
         .over {
             overflow: hidden;
             white-space: nowrap;
+        }
+
+        .custom-article {
+            position: relative;
+        }
+
+        .custom-article .number-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #0098CC;
+            /* Color de fondo del número */
+            color: white;
+            /* Color del texto del número */
+            width: 24px;
+            /* Ancho del número */
+            height: 24px;
+            /* Altura del número */
+            border-radius: 50%;
+            /* Para hacer un círculo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            /* Tamaño del texto del número */
+            font-weight: bold;
         }
     </style>
     <x-modal-model title="Crear equipo" name="create">

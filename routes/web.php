@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\RolController;
-use App\Http\Controllers\UserController;
 use App\Models\Client;
 use App\Models\Device;
 use App\Models\DeviceType;
@@ -28,7 +26,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/', function () {
+    Route::get('/', function () {   
         return view('dashboard');
     })->name('dashboard');
 });
@@ -84,6 +82,7 @@ Route::get('/cliente/{client}', function(Client $client) {
     return view('admin.client.show')->with('client', $client);
 })->name('clients.show');
 
+
 /* Services */
 Route::get('/servicios', function () {
     return view('admin.service.index');
@@ -92,9 +91,10 @@ Route::get('/servicio/{service}', function(Service $service) {
     return view('admin.service.show')->with('service', $service);
 })->name('service.show');
 
-Route::get('/realizar-servicio', function () {
-    return view('admin.service.performed');
-})->name('service.performed');
+Route::get('/aprobar-servicio/{device}', function(Device $device) {
+    return view('admin.service.approve')->with('device', $device);
+})->name('service.approve');
+
 
 
 /* Parts */
@@ -104,3 +104,10 @@ Route::get('/repuestos', function () {
 Route::get('/repuesto/{part}', function(Part $part) {
     return view('admin.part.show')->with('part', $part);
 })->name('part.show');
+
+
+Route::middleware(['auth:sanctum', 'verified'])->middleware('technician')->group(function () {
+    Route::get('/realizar-servicio', function () {
+        return view('admin.service.performed');
+    })->name('service.performed');
+});

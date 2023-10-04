@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('description', 1000);
             $table->string('observations', 1000)->nullable();
             //$table->string('photo', 400)->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('viewed')->default(0);
+            $table->boolean('approved')->default(0);
             $table->unsignedInteger('actual_hours')->nullable();
             $table->timestamps();
 

@@ -68,7 +68,7 @@ class PerformedComponent extends Component
         //dd($validated);
         $device = Device::find($this->selectedDevice);
         $service = Service::find($this->selectedService);
-        $this->alert('question', "Estas seguro que quieres crear un servicio <b style='color: black !important;'>$service->name</b> para la máquina  <b style='color: black !important;'>$device->model - $device->serial_number</b>?", [
+        $this->alert('question', "Estas seguro que quieres crear el servicio <b style='color: black !important;'>$service->name</b> para la máquina  <b style='color: black !important;'>$device->model - $device->serial_number</b>?", [
             'timer' => null,
             'showConfirmButton' => true,
             'showCancelButton' => True,

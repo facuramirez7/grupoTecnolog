@@ -32,7 +32,7 @@ class ServiceSeeder extends Seeder
 
         DB::table('services')->insert([
             'name' => '2500',
-            'description' => 'Servicio de 5000 horas',
+            'description' => 'Servicio de 2500 horas',
             'prize' => 100,
             'created_at' => now(),
             'updated_at' => now()
@@ -41,6 +41,14 @@ class ServiceSeeder extends Seeder
         DB::table('services')->insert([
             'name' => '5000',
             'description' => 'Servicio de 5000 horas',
+            'prize' => 100,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('services')->insert([
+            'name' => '10000',
+            'description' => 'Servicio de 10000 horas',
             'prize' => 100,
             'created_at' => now(),
             'updated_at' => now()
