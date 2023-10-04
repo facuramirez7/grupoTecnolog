@@ -20,5 +20,19 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$CDJlX9AQPOoXfBm3gHX6q.f70fRIoXX3lqeqUN2Qm5JmdkjF4l9sq',
             'rol_id' => 1,
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'José',
+            'email' => 'jose@grupotecnolog.com',
+            'password' => '$2y$10$CDJlX9AQPOoXfBm3gHX6q.f70fRIoXX3lqeqUN2Qm5JmdkjF4l9sq',
+            'rol_id' => 5,
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Pedro Perovich',
+            'email' => 'pedro@grupotecnolog.com',
+            'password' => '$2y$10$CDJlX9AQPOoXfBm3gHX6q.f70fRIoXX3lqeqUN2Qm5JmdkjF4l9sq',
+            'rol_id' => 50,
+        ]);
     }
 }

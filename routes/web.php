@@ -92,6 +92,10 @@ Route::get('/servicio/{service}', function(Service $service) {
     return view('admin.service.show')->with('service', $service);
 })->name('service.show');
 
+Route::get('/realizar-servicio', function () {
+    return view('admin.service.performed');
+})->name('service.performed');
+
 
 /* Parts */
 Route::get('/repuestos', function () {

@@ -36,59 +36,71 @@
                     <div class="flex-grow md:block md:overflow-y-auto overflow-x-hidden"
                         :class="{ 'opacity-1': sidebarOpen, 'opacity-0': !sidebarOpen }">
 
-                        {{-- Dashboard --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring {{ request()->is('dashboard') ? 'bg-gray-300' : '' }}"
-                            href="{{ route('dashboard') }}" wire:navigate>
-                            <i class="fa-solid fa-house-chimney"></i><span class="mx-4">Inicio</span>
-                        </a>
+                        @if (Auth::user()->rol_id == 1 || Auth::user()->rol_id == 5)
+                            {{-- Dashboard --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring {{ request()->is('dashboard') ? 'bg-gray-300' : '' }}"
+                                href="{{ route('dashboard') }}" wire:navigate>
+                                <i class="fa-solid fa-house-chimney"></i><span class="mx-4">Inicio</span>
+                            </a>
 
-                        {{-- Devices --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring @if (request()->routeIs('devices.index')) bg-gray-300 @endif"
-                            href="{{ route('devices.index') }}" wire:navigate>
-                            <i class="fa-solid fa-tachograph-digital"></i><span class="mx-4">Equipos</span>
-                        </a>
+                            {{-- Devices --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring @if (request()->routeIs('devices.index')) bg-gray-300 @endif"
+                                href="{{ route('devices.index') }}" wire:navigate>
+                                <i class="fa-solid fa-tachograph-digital"></i><span class="mx-4">Equipos</span>
+                            </a>
 
-                        {{-- Parts --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('parts.index')) bg-gray-300 @endif"
-                            href="{{ route('parts.index') }}" wire:navigate>
-                            <i class="fa-solid fa-ring"></i><span class="mx-4">Repuestos</span>
-                        </a>
+                            {{-- Parts --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('parts.index')) bg-gray-300 @endif"
+                                href="{{ route('parts.index') }}" wire:navigate>
+                                <i class="fa-solid fa-ring"></i><span class="mx-4">Repuestos</span>
+                            </a>
 
-                        {{-- Services --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('services.index')) bg-gray-300 @endif"
-                            href="{{ route('services.index') }}" wire:navigate>
-                            <i class="fa-solid fa-screwdriver-wrench"></i><span class="mx-4">Servicios</span>
-                        </a>
+                            {{-- Services --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('services.index')) bg-gray-300 @endif"
+                                href="{{ route('services.index') }}" wire:navigate>
+                                <i class="fa-solid fa-screwdriver-wrench"></i><span class="mx-4">Servicios</span>
+                            </a>
 
-                        {{-- Clients --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('clients.index')) bg-gray-300 @endif"
-                            href="{{ route('clients.index') }}" wire:navigate>
-                            <i class="fa-solid fa-wine-bottle"></i></i><span class="mx-4">Clientes</span>
-                        </a>
+                            {{-- Clients --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('clients.index')) bg-gray-300 @endif"
+                                href="{{ route('clients.index') }}" wire:navigate>
+                                <i class="fa-solid fa-wine-bottle"></i></i><span class="mx-4">Clientes</span>
+                            </a>
 
-                        {{-- Users --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('users.index')) bg-gray-300 @endif"
-                            href="{{ route('users.index') }}" wire:navigate>
-                            <i class="fa-solid fa-users"></i></i><span class="mx-4">Usuarios</span>
-                        </a>
+                            {{-- Users --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('users.index')) bg-gray-300 @endif"
+                                href="{{ route('users.index') }}" wire:navigate>
+                                <i class="fa-solid fa-users"></i></i><span class="mx-4">Usuarios</span>
+                            </a>
 
-                        {{-- Roles --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('rols.index')) bg-gray-300 @endif"
-                            href="{{ route('rols.index') }}" wire:navigate>
-                            <i class="fa-solid fa-person-circle-exclamation"></i></i><span class="mx-4">Roles</span>
-                        </a>
+                            {{-- Roles --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('rols.index')) bg-gray-300 @endif"
+                                href="{{ route('rols.index') }}" wire:navigate>
+                                <i class="fa-solid fa-person-circle-exclamation"></i></i><span
+                                    class="mx-4">Roles</span>
+                            </a>
 
-                        {{-- Device Types --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring @if (request()->routeIs('device-type.index')) bg-gray-300 @endif"
-                            href="{{ route('device-type.index') }}" wire:navigate>
-                            <i class="fa-solid fa-list-ol"></i><span class="mx-4">Tipos de equipo</span>
-                        </a>
+                            {{-- Device Types --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring @if (request()->routeIs('device-type.index')) bg-gray-300 @endif"
+                                href="{{ route('device-type.index') }}" wire:navigate>
+                                <i class="fa-solid fa-list-ol"></i><span class="mx-4">Tipos de equipo</span>
+                            </a>
 
-                        {{-- Part Types --}}
-                        <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('part-type.index')) bg-gray-300 @endif"
-                            href="{{ route('part-type.index') }}" wire:navigate>
-                            <i class="fa-solid fa-list-ol"></i><span class="mx-4">Tipos de repuesto</span>
-                        </a>
+                            {{-- Part Types --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('part-type.index')) bg-gray-300 @endif"
+                                href="{{ route('part-type.index') }}" wire:navigate>
+                                <i class="fa-solid fa-list-ol"></i><span class="mx-4">Tipos de repuesto</span>
+                            </a>
+                        @endif
+
+                        @if (Auth::user()->rol_id == 50)
+                            {{-- Services --}}
+                            <a class="flex items-center px-4 py-3 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:outline-none focus:ring  @if (request()->routeIs('service.performed')) bg-gray-300 @endif"
+                                href="{{ route('service.performed') }}" wire:navigate>
+                                <i class="fa-solid fa-screwdriver-wrench"></i><span class="mx-4">Servicios</span>
+                            </a>
+                        @endif
+
 
 
                     </div>

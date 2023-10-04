@@ -14,6 +14,15 @@ class ServiceSeeder extends Seeder
     public function run(): void
     {
         DB::table('services')->insert([
+            'id' => 1,
+            'name' => 'Personalizado',
+            'description' => 'Servicio personalizado',
+            'prize' => null,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('services')->insert([
             'name' => 'Puesta en marcha',
             'description' => 'Inicio de la actividad',
             'prize' => 100,

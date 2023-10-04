@@ -174,4 +174,11 @@
             Editar equipo <i class="fa-solid fa-pencil"></i>
         </x-primary-button>
     </form>
+    
+<ul>
+    @foreach ($device->performeds as $performed)
+<li>{{$performed->created_at}} - {{ $performed->description}}</li>    
+        
+    @endforeach
+</ul>
 </div>
