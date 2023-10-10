@@ -148,7 +148,7 @@
             <select wire:model='client_id'
                 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="myInput2">
-                <option value="0">Sin cliente</option>  
+                <option value="0">Sin cliente</option>
                 @foreach ($clients as $client)
                     <option value="{{ $client->id }}" wire:key="client-{{ $client->id }}">{{ $client->name }}
                     </option>
@@ -173,5 +173,10 @@
             wire:loading.attr="disabled">
             Editar equipo <i class="fa-solid fa-pencil"></i>
         </x-primary-button>
+        <br>
+        <br>
+        <a href="/servicios-realizados/{{ $device->id }}" target="_blank"><x-secondary-button wire:loading.attr="disabled">
+                Ver servicios <i class="fa-solid fa-wrench"></i>
+            </x-secondary-button></a>
     </form>
 </div>

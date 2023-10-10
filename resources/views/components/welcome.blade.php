@@ -48,6 +48,5 @@
             </div>
         </div>
     </div>
-    <h2 class="text-center">Te quiero Papi <3</h2>
 </div>
 <!-- Component End  -->

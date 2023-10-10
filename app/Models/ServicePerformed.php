@@ -21,4 +21,14 @@ class ServicePerformed extends Model
         'viewed',
         'approved',
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

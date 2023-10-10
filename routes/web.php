@@ -65,6 +65,10 @@ Route::get('/tipos-de-equipos', function () {
 Route::get('/tipo-de-equipo/{type}', function(DeviceType $type) {
     return view('admin.devType.show')->with('type', $type);
 })->name('device-types.show');
+Route::get('/servicios-realizados/{device}', function(Device $device) {
+    return view('admin.device.services')->with('device', $device);
+})->name('device.services');
+
 
 /* Part Type ONLY SUPER ADMIN = ME*/
 Route::get('/tipos-de-repuestos', function () {
@@ -90,11 +94,6 @@ Route::get('/servicios', function () {
 Route::get('/servicio/{service}', function(Service $service) {
     return view('admin.service.show')->with('service', $service);
 })->name('service.show');
-
-Route::get('/aprobar-servicio/{device}', function(Device $device) {
-    return view('admin.service.approve')->with('device', $device);
-})->name('service.approve');
-
 
 
 /* Parts */

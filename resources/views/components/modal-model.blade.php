@@ -12,9 +12,11 @@
     {{-- Modal Body --}}
     <div class="bg-white rounded m-auto fixed inset-0 max-w-2xl overflow-y-auto" style="max-height:500px">
 
-        <div class="p-4 text-xl flex items-center justify-center">
-            <b>{{ $title ?? 'Grupo Tecnolog' }}</b>
-        </div>
+        @if (isset($title))
+            <div class="p-4 text-xl flex items-center justify-center">
+                <b>{{ $title }}</b>
+            </div>
+        @endif
         <div>
             {{ $body }}
         </div>

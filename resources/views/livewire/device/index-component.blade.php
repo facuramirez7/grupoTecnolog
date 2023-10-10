@@ -60,10 +60,14 @@
                             @endif
                         </a>
                         @php
-                            $notifications = ServicePerformed::where('device_id', $device->id)->where('viewed', 0)->get('device_id');
+                            $notifications = ServicePerformed::where('device_id', $device->id)
+                                ->where('viewed', 0)
+                                ->get('device_id');
                         @endphp
                         @if (count($notifications) > 0)
-                             <a href=""><div class="number-badge"><i class="fa-solid fa-wrench"></i></div>   </a> 
+                            <a href="/servicios-realizados/{{ $device->id }}">
+                                <div class="number-badge"><i class="fa-solid fa-wrench"></i></div>
+                            </a>
                         @endif
 
                         <header class="flex items-center justify-between leading-tight p-2 md:p-4">
